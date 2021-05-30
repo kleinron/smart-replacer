@@ -116,7 +116,7 @@ describe('Replacer', () => {
             });
 
             it('default replacers can be disabled', () => {
-                const replacer = Replacer.createReplacerFunction({withBuiltInReplacers: false});
+                const replacer = Replacer.createReplacerFunction({useBuiltInReplacers: false});
                 const obj = {fld: new Set()};
                 const nativeJson = JSON.stringify(obj);
                 const parsedFromNative = JSON.parse(nativeJson);
@@ -139,7 +139,7 @@ describe('Replacer', () => {
                 Replacer.createReplacerFunction({
                     monkeyPatchJSON: true,
                     replacers: [new StupidReplacer()],
-                    withBuiltInReplacers: false
+                    useBuiltInReplacers: false
                 });
                 const obj = {
                     we_found_love_in_a_hopeless_place: new Set().add(10).add(20).add(30)
