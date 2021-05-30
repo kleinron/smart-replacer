@@ -42,8 +42,7 @@ class SetReplacer {
 }
 
 function createCoreReplacers() {
-    const replacers = [ErrorReplacer, DateReplacer, MapReplacer, SetReplacer].map(c => new c());
-    return replacers;
+    return [ErrorReplacer, DateReplacer, MapReplacer, SetReplacer].map(c => new c());
 }
 
 class Replacer {
