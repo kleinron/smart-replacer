@@ -1,0 +1,10 @@
+{
+  "name": "smart-replacer",
+  "version": "1.0.0",
+  "dependencies": {
+    "serialize-error": "^8.1.0"
+  },
+  "devDependencies": {
+    "jest": "^27.0.3"
+  }
+}
