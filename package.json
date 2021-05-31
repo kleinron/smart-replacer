@@ -1,14 +1,12 @@
 {
   "name": "smart-replacer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
+  "main": "src/index.js",
   "dependencies": {
     "serialize-error": "^8.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.27.0",
-    "eslint-config-google": "^0.14.0",
     "jest": "^27.0.3",
     "semistandard": "*"
   },
