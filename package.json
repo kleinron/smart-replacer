@@ -11,21 +11,13 @@
     "semistandard": "*"
   },
   "scripts": {
-    "init": "eslint --init",
     "lint": "semistandard",
     "lint-with-fix": "semistandard --fix",
     "test": "jest"
   },
   "semistandard": {
-    "globals": [
-      "describe",
-      "context",
-      "before",
-      "beforeEach",
-      "after",
-      "afterEach",
-      "it",
-      "expect"
+    "env": [
+      "jest"
     ]
   }
 }
