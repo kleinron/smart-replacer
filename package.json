@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "jest": "^27.0.3",
-    "semistandard": "*"
+    "semistandard": "^16.0.0"
   },
   "scripts": {
     "lint": "semistandard",
