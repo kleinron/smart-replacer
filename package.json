@@ -1,6 +1,6 @@
 {
   "name": "smart-replacer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
@@ -13,7 +13,19 @@
   "scripts": {
     "init": "eslint --init",
     "lint": "semistandard",
-    "lint-with-fix": "semistandard --fix src/**/*.js",
+    "lint-with-fix": "semistandard --fix",
     "test": "jest"
+  },
+  "semistandard": {
+    "globals": [
+      "describe",
+      "context",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it",
+      "expect"
+    ]
   }
 }
