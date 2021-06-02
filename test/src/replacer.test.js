@@ -37,6 +37,23 @@ describe('Replacer', () => {
       expect(parsedMap).toEqual(m);
     });
 
+    it('serializes to Map even integers as keys', () => {
+      const m = new Map();
+      m.set(1, 'A').set(2, [66, 77, 88]);
+      const obj = { fld: m };
+      const json = JSON.stringify(obj, Replacer.createReplacerFunction());
+      const parsed = JSON.parse(json);
+      const parsedMap = objectToMap(parsed.fld);
+
+      function convertStringToIntKeys (m) {
+        return Array.from(m.entries())
+          .reduce((agg, [k, v]) => agg.set(parseInt(k), v), new Map());
+      }
+
+      const intKeysMap = convertStringToIntKeys(parsedMap);
+      expect(intKeysMap).toEqual(m);
+    });
+
     it('serializes a Date by default', () => {
       const d = new Date(1948, 3, 25);
       const obj = { fld: d };
