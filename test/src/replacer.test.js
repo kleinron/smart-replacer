@@ -103,6 +103,17 @@ describe('Replacer', () => {
         expect(setFromReplacer).toEqual(setFromNative);
       });
 
+      it('custom replacers array can be changed externally with no impact', () => {
+        const customSetReplacers = [new CustomSetReplacer()];
+        const replacer = Replacer.createReplacerFunction({ replacers: customSetReplacers });
+        customSetReplacers[0] = null;
+        const obj = { fld: new Set() };
+        const json = JSON.stringify(obj, replacer);
+        const parsed = JSON.parse(json);
+        const foo = parsed.fld;
+        expect(foo).toEqual('foo');
+      });
+
       it('when monkey patching is explicitly set to false then not supported', () => {
         Replacer.createReplacerFunction({ monkeyPatchJSON: false });
         const mySet = new Set().add('a').add('b').add('c');
