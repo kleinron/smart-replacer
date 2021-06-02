@@ -81,6 +81,7 @@ See tests for custom logic implementation.
   there's no way to blindly deserialize it back to in-memory objects. <br/> 
   For logging purposes that's fine, but for other scenarios, one might need to know the desired schema in advance for proper deserialization.
 * A `Map` object is serialized to a regular object with keys as strings. This means that another extra step would be needed if the keys of the original `Map` were numbers, for instance.
+* If `options.monkeyPatchJSON` is set to `true`, then `JSON.stringify` acts differently: if the `replacer` argument is missing, or set to `undefined`, `null`, `0` or `false` (anything evaluated to `false`, basically), then the actual replacer to be used is the one returned from the function `Replacer.createReplacerFunction`. If, however, the code that calls `JSON.stringify` explicitly provides a replacer function `f`, then `f` would be used as the actual replacer.
 
 ## Testing
 
