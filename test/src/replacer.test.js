@@ -114,8 +114,7 @@ describe('Replacer', () => {
       it('when monkey patching is explicitly set to true then supported', () => {
         Replacer.createReplacerFunction({
           monkeyPatchJSON: true,
-          replacers: [new StupidReplacer()],
-          useBuiltInReplacers: false
+          replacers: [new StupidReplacer()]
         });
         const obj = {
           we_found_love_in_a_hopeless_place: new Set().add(10).add(20).add(30)

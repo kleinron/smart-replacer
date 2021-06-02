@@ -84,10 +84,10 @@ class Replacer {
       ...options
     };
     const customReplacers = opts.replacers;
-    const builtInReplacers = createCoreReplacers(opts);
+    const coreReplacers = createCoreReplacers(opts);
     const replacers = []
       .concat(...customReplacers)
-      .concat(builtInReplacers)
+      .concat(coreReplacers)
       .concat([new NoopReplacer()]);
 
     const replacerFn = (key, value) => {
