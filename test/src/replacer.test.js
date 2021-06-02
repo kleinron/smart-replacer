@@ -92,7 +92,7 @@ describe('Replacer', () => {
       });
 
       it('default replacers can be disabled', () => {
-        const replacer = Replacer.createReplacerFunction({ useBuiltInReplacers: false });
+        const replacer = Replacer.createReplacerFunction({ useSetReplacer: false });
         const obj = { fld: new Set() };
         const nativeJson = JSON.stringify(obj);
         const parsedFromNative = JSON.parse(nativeJson);

@@ -43,8 +43,18 @@ class SetReplacer {
   }
 }
 
-function createCoreReplacers () {
-  return [new ErrorReplacer(), new DateReplacer(), new MapReplacer(), new SetReplacer()];
+function createCoreReplacers (options) {
+  return Object.entries({
+    useErrorReplacer: new ErrorReplacer(),
+    useDateReplacer: new DateReplacer(),
+    useMapReplacer: new MapReplacer(),
+    useSetReplacer: new SetReplacer(),
+  }).reduce((agg, [k, v]) => {
+    if (options[k]) {
+      agg.push(v);
+    }
+    return agg
+  }, []);
 }
 
 class Replacer {
@@ -55,14 +65,16 @@ class Replacer {
     const opts = {
       ...{
         replacers: [],
-        useBuiltInReplacers: true,
+        useErrorReplacer: true,
+        useDateReplacer: true,
+        useMapReplacer: true,
+        useSetReplacer: true,
         monkeyPatchJSON: false
       },
       ...options
     };
     const customReplacers = opts.replacers;
-    const useBuiltInReplacers = opts.useBuiltInReplacers;
-    const builtInReplacers = useBuiltInReplacers ? createCoreReplacers() : [];
+    const builtInReplacers = createCoreReplacers(opts);
     const replacers = [].concat(...customReplacers).concat(builtInReplacers);
 
     const replacerFn = (key, value) => {
