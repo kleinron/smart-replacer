@@ -1,6 +1,6 @@
 {
   "name": "smart-replacer",
-  "version": "1.0.3",
+  "version": "0.2.0",
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {

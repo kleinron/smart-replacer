@@ -17,30 +17,6 @@ const myThrow = (msg) => {
 };
 
 describe('Replacer', () => {
-  it('works with default constructor', () => {
-    const replacer = new Replacer();
-    const obj = { a: 123 };
-    const json = JSON.stringify(obj, replacer.createReplacer());
-    const parsed = JSON.parse(json);
-    expect(parsed.a).toEqual(123);
-  });
-
-  it('works with a custom replacer', () => {
-    const numReplacer = {
-      canHandle: (key, value) => {
-        return (typeof value === 'number') || (value instanceof Number);
-      },
-      replace: (key, value) => {
-        return value + 100;
-      }
-    };
-    const replacer = new Replacer([numReplacer]);
-    const obj = { a: 7 };
-    const json = JSON.stringify(obj, replacer.createReplacer());
-    const parsed = JSON.parse(json);
-    expect(parsed.a).toEqual(107);
-  });
-
   describe('createReplacerFunction', () => {
     it('serializes a Set by default', () => {
       const s = new Set();

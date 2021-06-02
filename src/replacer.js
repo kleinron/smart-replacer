@@ -48,24 +48,6 @@ function createCoreReplacers () {
 }
 
 class Replacer {
-  constructor (replacers) {
-    this.replacers = Array.from(replacers || []);
-  }
-
-  replace (key, value) {
-    for (let i = 0; i < this.replacers.length; i++) {
-      const replacer = this.replacers[i];
-      if (replacer.canHandle(key, value)) {
-        return replacer.replace(key, value);
-      }
-    }
-    return value;
-  }
-
-  createReplacer () {
-    return this.replace.bind(this);
-  }
-
   static createReplacerFunction (options) {
     if (options === undefined) {
       options = {};
@@ -82,16 +64,26 @@ class Replacer {
     const useBuiltInReplacers = opts.useBuiltInReplacers;
     const builtInReplacers = useBuiltInReplacers ? createCoreReplacers() : [];
     const replacers = [].concat(...customReplacers).concat(builtInReplacers);
-    const myReplacer = new Replacer(replacers);
+
+    const replacerFn = (key, value) => {
+      for (let i = 0; i < replacers.length; i++) {
+        const replacer = replacers[i];
+        if (replacer.canHandle(key, value)) {
+          return replacer.replace(key, value);
+        }
+      }
+      return value;
+    }
+
     if (opts.monkeyPatchJSON) {
       const stringify = JSON.stringify;
       JSON.stringify = (value, replacer, space) => {
-        const actualReplacer = replacer || myReplacer.createReplacer();
+        const actualReplacer = replacer || replacerFn;
         return stringify(value, actualReplacer, space);
       };
     }
 
-    return myReplacer.createReplacer();
+    return replacerFn;
   }
 
   static createReplacer (options) {
