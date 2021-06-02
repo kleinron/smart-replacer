@@ -1,3 +1,5 @@
+'use strict';
+
 const { serializeError } = require('serialize-error');
 
 class NoopReplacer {
@@ -17,16 +19,6 @@ class ErrorReplacer {
 
   replace (key, value) {
     return serializeError(value);
-  }
-}
-
-class DateReplacer {
-  canHandle (key, value) {
-    return value instanceof Date;
-  }
-
-  replace (key, value) {
-    return value.toISOString();
   }
 }
 
@@ -56,7 +48,6 @@ class SetReplacer {
 function createCoreReplacers (options) {
   return Object.entries({
     useErrorReplacer: new ErrorReplacer(),
-    useDateReplacer: new DateReplacer(),
     useMapReplacer: new MapReplacer(),
     useSetReplacer: new SetReplacer()
   }).reduce((agg, [k, v]) => {
@@ -76,7 +67,6 @@ class Replacer {
       ...{
         replacers: [],
         useErrorReplacer: true,
-        useDateReplacer: true,
         useMapReplacer: true,
         useSetReplacer: true,
         monkeyPatchJSON: false

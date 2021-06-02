@@ -54,16 +54,6 @@ describe('Replacer', () => {
       expect(intKeysMap).toEqual(m);
     });
 
-    it('serializes a Date by default', () => {
-      const d = new Date(1948, 3, 25);
-      const obj = { fld: d };
-      const json = JSON.stringify(obj, Replacer.createReplacerFunction());
-      const parsed = JSON.parse(json);
-      const dateAsString = parsed.fld;
-      const parsedDate = new Date(dateAsString);
-      expect(parsedDate).toEqual(d);
-    });
-
     it('serializes an Error by default', () => {
       const message = 'this is my message';
       let obj;
