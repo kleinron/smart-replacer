@@ -83,10 +83,10 @@ class Replacer {
       },
       ...options
     };
-    const customReplacers = opts.replacers;
+    const customReplacers = [...opts.replacers];
     const coreReplacers = createCoreReplacers(opts);
     const replacers = []
-      .concat(...customReplacers)
+      .concat(customReplacers)
       .concat(coreReplacers)
       .concat([new NoopReplacer()]);
 
