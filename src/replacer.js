@@ -1,5 +1,15 @@
 const { serializeError } = require('serialize-error');
 
+class NoopReplacer {
+  canHandle (_key, _value) {
+    return true;
+  }
+
+  replace (key, value) {
+    return value;
+  }
+}
+
 class ErrorReplacer {
   canHandle (key, value) {
     return value instanceof Error;
@@ -75,16 +85,14 @@ class Replacer {
     };
     const customReplacers = opts.replacers;
     const builtInReplacers = createCoreReplacers(opts);
-    const replacers = [].concat(...customReplacers).concat(builtInReplacers);
+    const replacers = []
+      .concat(...customReplacers)
+      .concat(builtInReplacers)
+      .concat([new NoopReplacer()]);
 
     const replacerFn = (key, value) => {
-      for (let i = 0; i < replacers.length; i++) {
-        const replacer = replacers[i];
-        if (replacer.canHandle(key, value)) {
-          return replacer.replace(key, value);
-        }
-      }
-      return value;
+      const replacer = replacers.find(r => r.canHandle(key, value));
+      return replacer.replace(key, value);
     }
 
     if (opts.monkeyPatchJSON) {
