@@ -58,12 +58,12 @@ function createCoreReplacers (options) {
     useErrorReplacer: new ErrorReplacer(),
     useDateReplacer: new DateReplacer(),
     useMapReplacer: new MapReplacer(),
-    useSetReplacer: new SetReplacer(),
+    useSetReplacer: new SetReplacer()
   }).reduce((agg, [k, v]) => {
     if (options[k]) {
       agg.push(v);
     }
-    return agg
+    return agg;
   }, []);
 }
 
@@ -93,7 +93,7 @@ class Replacer {
     const replacerFn = (key, value) => {
       const replacer = replacers.find(r => r.canHandle(key, value));
       return replacer.replace(key, value);
-    }
+    };
 
     if (opts.monkeyPatchJSON) {
       const stringify = JSON.stringify;
