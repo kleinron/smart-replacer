@@ -3,16 +3,16 @@ An extensible JSON stringify replacer with default support for error objects, se
 
 ## Installation
 ```bash
-npm install smart-serializer
+npm install smart-replacer
 ```
 
 ## Usage
 ```javascript
-const { Replacer } = require('smart-replacer');
+const { createReplacerFunction } = require('smart-replacer');
 
 const movie = {
   name: "Star Wars",
-  cast: new Map().set("director", "George Lucas").set("producer", "Gary Kurtz"),
+  cast: new Map([["director", "George Lucas"], ["producer", "Gary Kurtz"]]),
   actors: new Set(["Mark Hamill", "Harrison Ford", "Carrie Fisher", "Peter Cushing", "Alec Guinness"])
 };
 
@@ -21,11 +21,11 @@ console.log(JSON.stringify(movie));
 // => {"name":"Star Wars","cast":{},"actors":{}}
 
 // replacer in action
-console.log(JSON.stringify(movie, Replacer.createReplacerFunction()));
+console.log(JSON.stringify(movie, createReplacerFunction()));
 // => {"name":"Star Wars","cast":{"director":"George Lucas","producer":"Gary Kurtz"},"actors":["Mark Hamill","Harrison Ford","Carrie Fisher","Peter Cushing","Alec Guinness"]}
 
-// replacer with monkey patching
-Replacer.createReplacerFunction({monkeyPatchJSON: true});
+// replacer with monkey patching (change global JSON::stringify)
+createReplacerFunction({monkeyPatchJSON: true});
 console.log(JSON.stringify(movie));
 // => {"name":"Star Wars","cast":{"director":"George Lucas","producer":"Gary Kurtz"},"actors":["Mark Hamill","Harrison Ford","Carrie Fisher","Peter Cushing","Alec Guinness"]}
 ```
@@ -37,7 +37,7 @@ doesn't support serialization of these types out-of-the-box.
 Properly serializing objects to JSON can be a great advantage when it comes to structured logging.
 
 ## API
-The single function `Replacer.createReplacerFunction(options?)` takes an `options` parameter (optional), 
+The single function `createReplacerFunction(options?)` takes an `options` parameter (optional), 
 and returns a replacer function, which becomes handy when using [`JSON.stringify`](https://262.ecma-international.org/6.0/#sec-json.stringify)
 
 __options__
@@ -74,7 +74,32 @@ for each key-value pair that are evaluated during the `JSON.stringify` execution
       return coreReplacer.replace(key, value) and we're done
   otherwise, return value // unchanged
 ```
-See tests for custom logic implementation.
+
+Example:
+
+Suppose you want `Date` to have a shorter output than the regular ISO representation when serializing to JSON:
+```javascript
+const aNewHope = {releaseDate: new Date(1977, 4, 25)}; // May --> 4
+console.log(JSON.stringify(aNewHope));
+// => {"releaseDate":"1977-05-25T00:00:00.000Z"}
+
+createReplacerFunction({
+  replacers: [
+    {
+      canHandle: function (key, value) {
+        return value instanceof Date;
+      },
+      replace: function (key, value) {
+        return value.toISOString().replace('T', ' ').substr(0, 19)
+      }
+    }
+  ],
+  monkeyPatchJSON: true
+});
+
+console.log(JSON.stringify(aNewHope));
+// => {"releaseDate":"1977-05-25 00:00:00"}
+```
 
 ## Notes
 * This project serializes a `Set` to an array and a `Map` to an object. This means that once serialized to JSON, 
@@ -96,6 +121,10 @@ npm test
 
 ## Thanks
 * This project wraps the great work that Sindre Sorhus has done in [serialize-error](https://github.com/sindresorhus/serialize-error)
+
+## Discussions and Resources
+* [How to represent a set in JSON?](https://softwareengineering.stackexchange.com/q/355176/16672)
+* [The 80/20 Guide to JSON.stringify in JavaScript](https://thecodebarbarian.com/the-80-20-guide-to-json-stringify-in-javascript)
 
 ## License
 MIT &copy; Ron Klein
