@@ -15,6 +15,17 @@
     "lint-with-fix": "semistandard --fix",
     "test": "jest"
   },
+  "homepage": "https://github.com/kleinron/smart-replacer#readme",
+  "author": {
+    "name": "Ron Klein",
+    "url": "https://github.com/kleinron"
+  },
+  "description": "An extensible JSON stringify replacer with default support for error objects, sets, and maps.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kleinron/smart-replacer.git"
+  },
+  "keywords": ["json", "stringify", "replacer", "function", "serialization", "log", "logging"],
   "semistandard": {
     "env": [
       "jest"
