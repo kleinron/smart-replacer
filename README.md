@@ -1,3 +1,4 @@
+[![CI](https://github.com/kleinron/smart-replacer/actions/workflows/main.yaml/badge.svg)](https://github.com/kleinron/smart-replacer/actions/workflows/main.yaml)
 # smart-replacer
 An extensible JSON stringify replacer with default support for error objects, sets, and maps.
 
