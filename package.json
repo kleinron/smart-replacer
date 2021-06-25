@@ -1,6 +1,12 @@
 {
   "name": "smart-replacer",
-  "version": "0.3.2",
+  "homepage": "https://github.com/kleinron/smart-replacer#readme",
+  "author": {
+    "name": "Ron Klein",
+    "url": "https://github.com/kleinron"
+  },
+  "description": "An extensible JSON stringify replacer with default support for error objects, sets, and maps.",
+  "version": "0.3.3",
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
@@ -15,12 +21,6 @@
     "lint-with-fix": "semistandard --fix",
     "test": "jest"
   },
-  "homepage": "https://github.com/kleinron/smart-replacer#readme",
-  "author": {
-    "name": "Ron Klein",
-    "url": "https://github.com/kleinron"
-  },
-  "description": "An extensible JSON stringify replacer with default support for error objects, sets, and maps.",
   "repository": {
     "type": "git",
     "url": "https://github.com/kleinron/smart-replacer.git"
@@ -36,6 +36,9 @@
   ],
   "engines": {
     "node": ">=10"
+  },
+  "bugs": {
+    "url": "https://github.com/kleinron/smart-replacer/issues"
   },
   "semistandard": {
     "env": [
