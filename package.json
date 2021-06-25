@@ -25,7 +25,18 @@
     "type": "git",
     "url": "https://github.com/kleinron/smart-replacer.git"
   },
-  "keywords": ["json", "stringify", "replacer", "function", "serialization", "log", "logging"],
+  "keywords": [
+    "json",
+    "stringify",
+    "replacer",
+    "function",
+    "serialization",
+    "log",
+    "logging"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
   "semistandard": {
     "env": [
       "jest"
