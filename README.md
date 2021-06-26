@@ -25,7 +25,7 @@ console.log(JSON.stringify(movie));
 console.log(JSON.stringify(movie, createReplacerFunction()));
 // => {"name":"Star Wars","cast":{"director":"George Lucas","producer":"Gary Kurtz"},"actors":["Mark Hamill","Harrison Ford","Carrie Fisher","Peter Cushing","Alec Guinness"]}
 
-// replacer with monkey patching (change global JSON::stringify)
+// replacer with monkey patching (change global JSON.stringify)
 createReplacerFunction({monkeyPatchJSON: true});
 console.log(JSON.stringify(movie));
 // => {"name":"Star Wars","cast":{"director":"George Lucas","producer":"Gary Kurtz"},"actors":["Mark Hamill","Harrison Ford","Carrie Fisher","Peter Cushing","Alec Guinness"]}
