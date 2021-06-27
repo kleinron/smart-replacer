@@ -1,4 +1,4 @@
-[![CI](https://github.com/kleinron/smart-replacer/actions/workflows/main.yaml/badge.svg)](https://github.com/kleinron/smart-replacer/actions/workflows/main.yaml)
+[![CI](https://github.com/kleinron/smart-replacer/actions/workflows/main.yaml/badge.svg)](https://github.com/kleinron/smart-replacer/actions/workflows/main.yaml) [![GitHub license](https://img.shields.io/github/license/kleinron/smart-replacer)](https://github.com/kleinron/smart-replacer/blob/main/LICENSE)
 # smart-replacer
 An extensible JSON stringify replacer with default support for error objects, sets, and maps.
 
@@ -38,7 +38,7 @@ doesn't support serialization of these types out-of-the-box.
 Properly serializing objects to JSON can be a great advantage when it comes to structured logging.
 
 ## API
-The single function `createReplacerFunction(options?)` takes an `options` parameter (optional), 
+The single function `createReplacerFunction(options?)` takes an `options` parameter (optional),
 and returns a replacer function, which becomes handy when using [`JSON.stringify`](https://262.ecma-international.org/6.0/#sec-json.stringify)
 
 __options__
@@ -103,8 +103,8 @@ console.log(JSON.stringify(aNewHope));
 ```
 
 ## Notes
-* This project serializes a `Set` to an array and a `Map` to an object. This means that once serialized to JSON, 
-  there's no way to blindly deserialize it back to in-memory objects. <br/> 
+* This project serializes a `Set` to an array and a `Map` to an object. This means that once serialized to JSON,
+  there's no way to blindly deserialize it back to in-memory objects. <br/>
   For logging purposes that's fine, but for other scenarios, one might need to know the desired schema in advance for proper deserialization.
 * A `Map` object is serialized to a regular object with keys as strings. This means that another extra step would be needed if the keys of the original `Map` were numbers, for instance.
 * If `options.monkeyPatchJSON` is set to `true`, then `JSON.stringify` acts differently: if the `replacer` argument is missing, or set to `undefined`, `null`, `0` or `false` (anything evaluated to `false`, basically), then the actual replacer to be used is the one returned from the function `Replacer.createReplacerFunction`. If, however, the code that calls `JSON.stringify` explicitly provides a replacer function `f`, then `f` would be used as the actual replacer.
