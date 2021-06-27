@@ -6,7 +6,7 @@
     "url": "https://github.com/kleinron"
   },
   "description": "An extensible JSON stringify replacer with default support for error objects, sets, and maps.",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
