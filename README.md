@@ -126,6 +126,7 @@ npm test
 ## Discussions and Resources
 * [How to represent a set in JSON?](https://softwareengineering.stackexchange.com/q/355176/16672)
 * [The 80/20 Guide to JSON.stringify in JavaScript](https://thecodebarbarian.com/the-80-20-guide-to-json-stringify-in-javascript)
+* [smart-replacer on npm](https://www.npmjs.com/package/smart-replacer)
 
 ## License
 MIT &copy; Ron Klein
